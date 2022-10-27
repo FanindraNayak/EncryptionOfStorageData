@@ -1,8 +1,14 @@
-from CeasseEncrypt import *
-from CeaserDecrypt import *
+# from CeasseEncrypt import *
+# from CeaserDecrypt import *
+import imp
+from CeaserCipher import *
+from Vigenère import *
 
-text = "CEASER CIPHER DEMO"
-s = 4
+
+from aes import *
+
+# text = "dasdasdasdasdasdasdasdasdasda"
+# s = 4
 
 # PlainText = input("Enter the plain Text: ")
 # CeaserCipherKey = input("Enter the CeaserCipherKey: ")
@@ -11,18 +17,39 @@ s = 4
 # AESCipherKey = input("Enter the Key: ")
 
 
-PlainText = "asd"
+PlainText = "I wandered lonely as a cloud That floats on."
+
 VignerCipherKey = "asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd"
-DesCipherKey = "asd"
-AESCipherKey = "asd"
+DesCipherKey = "\0\0\0\0\0\0\0\0"
+AESCipherKey = b"C&F)H@McQfTjWnZr"
 CeaserCipherKey = len(VignerCipherKey)//3
 print(CeaserCipherKey)
 
 # From NIS py File
 # Ceaser Cipher encrypt
-print("Shift pattern : " + str(CeaserCipherKey))
-print("Cipher: " + CeaserEncrypt(text,CeaserCipherKey))
+# print("Shift pattern : " + str(CeaserCipherKey))
+# print("Cipher: " + CeaserEncrypt(text,CeaserCipherKey))
+
+CeaserEncryptedText =  CeaserEncrypt(PlainText,CeaserCipherKey)
+# print("E :- "+CeaserEncryptedText)
 
 # Fromm CeaserCipherDecrypt Py file
-CeaserCipherDecrypt(text,CeaserCipherKey)
+CeaserDecryptedText = CeaserCipherDecrypt(CeaserEncryptedText,CeaserCipherKey)
+# print("D :- "+ CeaserDecryptedText)
 
+# Vigner
+
+dec=vigenere_encrypt(PlainText,VignerCipherKey)
+# print(dec)
+dectxt=vigenere_decrypt(dec,VignerCipherKey)
+# print(dectxt)
+
+
+
+# AES
+print(CeaserEncryptedText)
+ctoaes = AESEncryption(CeaserEncryptedText,AESCipherKey)
+print(ctoaes)
+
+ptas= AESDecription(ctoaes,AESCipherKey)
+print(ptas)

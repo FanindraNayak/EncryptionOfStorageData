@@ -4,11 +4,6 @@ alphabet = string.ascii_lowercase # "abcdefghijklmnopqrstuvwxyz"
 
 def CeaserCipherDecrypt(text,k):
     
-    # print("Welcome to Caesar Cipher Decryption.\n")
-    # encrypted_message = input("Enter the message you would like to decrypt: ").strip()
-    # print()
-    # key = int(input("Enter key to decrypt: "))
-    
     decrypted_message = ""
 
     for c in text:
@@ -21,6 +16,6 @@ def CeaserCipherDecrypt(text,k):
         else:
             decrypted_message += c
 
-    print("Your decrypted message is:\n")
-    print(decrypted_message)
+    # print("Your decrypted message is:\n")
+    # print(decrypted_message)
     return decrypted_message
