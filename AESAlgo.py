@@ -23,6 +23,6 @@ def AESDEcryption(ctext,key,cipher):
     cipher =  AES.new(key, AES.MODE_EAX, nonce)
     # decrypt the data
     plaintext = cipher.decrypt(ctext)
-    print("Plain text:", plaintext.decode())
+    # print("Plain text:", plaintext.decode())
     return plaintext.decode()
 # AESDEcryption(datec[1],key,datec[0])

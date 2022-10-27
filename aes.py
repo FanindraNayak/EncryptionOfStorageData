@@ -48,6 +48,6 @@ def dec(ctext,key,cipher):
     cipher =  AES.new(key, AES.MODE_EAX, nonce)
     # decrypt the data
     plaintext = cipher.decrypt(ctext)
-    print("Plain text:", plaintext.decode())
+    # print("Plain text:", plaintext.decode())
 
 dec(datec[1],key,datec[0])
