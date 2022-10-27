@@ -1,0 +1,16 @@
+# Ceaser cipher
+def CeaserEncrypt(text,s):
+    # print(text)
+    result = ""
+   # transverse the plain text
+    for i in range(len(text)):
+        # print(result)
+        char = text[i]
+      # Encrypt uppercase characters in plain text
+      
+        if (char.isupper()):
+            result += chr((ord(char) + s-65) % 26 + 65)
+      # Encrypt lowercase characters in plain text
+        else:
+            result += chr((ord(char) + s - 97) % 26 + 97)
+    return result
