@@ -1,4 +1,6 @@
 from Crypto.Cipher import AES
+# key = b'Sixteen byte key'
+# text = b'Y MQDTUHUT BEDUBO QI Q SBEKT JXQJ VBEQJI ED.'
 def AESEncryption(text,key):
     cipher = AES.new(key, AES.MODE_EAX)
 
@@ -14,13 +16,13 @@ def AESEncryption(text,key):
 
     return cipher,ciphertext
 
-# datec=enc(text,key)
-
+# datec=AESEncryption(text,key)
+# print(datec)
 def AESDEcryption(ctext,key,cipher):
     nonce = cipher.nonce
     cipher =  AES.new(key, AES.MODE_EAX, nonce)
     # decrypt the data
     plaintext = cipher.decrypt(ctext)
     print("Plain text:", plaintext.decode())
-
-# dec(datec[1],key,datec[0])
+    return plaintext.decode()
+# AESDEcryption(datec[1],key,datec[0])
