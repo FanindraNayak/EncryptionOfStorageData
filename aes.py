@@ -2,60 +2,52 @@
 # installing pycryptodome
 from Crypto.Cipher import AES
 
-# # encryption key
-# key = b'C&F)H@McQfTjWnZr'
-
+# encryption key
+key = b'Sixteen byte key'
+text =  b'hello from other side'
 # # create new instance of cipher
 # cipher = AES.new(key, AES.MODE_EAX)
 
 # # data to be encrypted
-# data = "Welcome to copyassignment.com!".encode()
+# # data = "Welcome to copyassignment.com!".encode()
 
-# # nonce is a random value generated each time we instantiate the cipher using new()
-# nonce = cipher.nonce
 
 # # encrypt the data
-# ciphertext = cipher.encrypt(data)
+# ciphertext = cipher.encrypt(text)
 
 # # print the encrypted data
 # print("Cipher text:", ciphertext)
 
-# # generate new instance with the key and nonce same as encryption cipher
+# generate new instance with the key and nonce same as encryption cipher
 # cipher = AES.new(key, AES.MODE_EAX, nonce=nonce)
-
+# nonce = cipher.nonce
+# cipher =  AES.new(key, AES.MODE_EAX, nonce)
 # # decrypt the data
 # plaintext = cipher.decrypt(ciphertext)
-# print("Plain text:", plaintext.decode('utf-8'))
+# print("Plain text:", plaintext.decode())
 
-def AESEncryption(text,key):
-    
-    # encryption key
-    # key = b'C&F)H@McQfTjWnZr'
-
-    # create new instance of cipher
+def enc(text,key):
     cipher = AES.new(key, AES.MODE_EAX)
 
     # data to be encrypted
-    data = text.encode()
+    # data = "Welcome to copyassignment.com!".encode()
 
 
     # encrypt the data
-    ciphertext = cipher.encrypt(data)
+    ciphertext = cipher.encrypt(text)
 
     # print the encrypted data
-    # print("Cipher text:", ciphertext)
-    return ciphertext
+    print("Cipher text:", ciphertext)
 
-def AESDecription(ciphertext ,key) :
-    # create new instance of cipher
-    cipher = AES.new(key, AES.MODE_EAX)
+    return cipher,ciphertext
 
-    # nonce is a random value generated each time we instantiate the cipher using new()
+datec=enc(text,key)
+
+def dec(ctext,key,cipher):
     nonce = cipher.nonce
-    # generate new instance with the key and nonce same as encryption cipher
-    cipher = AES.new(key, AES.MODE_EAX, nonce=nonce)
-
+    cipher =  AES.new(key, AES.MODE_EAX, nonce)
     # decrypt the data
-    plaintext = cipher.decrypt(ciphertext)
-    print("Plain text:", plaintext.decode('utf-8'))
-    return plaintext
+    plaintext = cipher.decrypt(ctext)
+    print("Plain text:", plaintext.decode())
+
+dec(datec[1],key,datec[0])

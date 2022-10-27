@@ -5,7 +5,7 @@ from CeaserCipher import *
 from Vigenère import *
 
 
-from aes import *
+from AESAlgo import *
 
 # text = "dasdasdasdasdasdasdasdasdasda"
 # s = 4
@@ -35,7 +35,8 @@ CeaserEncryptedText =  CeaserEncrypt(PlainText,CeaserCipherKey)
 
 # Fromm CeaserCipherDecrypt Py file
 CeaserDecryptedText = CeaserCipherDecrypt(CeaserEncryptedText,CeaserCipherKey)
-# print("D :- "+ CeaserDecryptedText)
+
+print("D :- "+ CeaserDecryptedText)
 
 # Vigner
 
@@ -47,9 +48,11 @@ dectxt=vigenere_decrypt(dec,VignerCipherKey)
 
 
 # AES
-print(CeaserEncryptedText)
-ctoaes = AESEncryption(CeaserEncryptedText,AESCipherKey)
-print(ctoaes)
+AesEncrypttedText=AESEncryption(CeaserEncryptedText.encode(),AESCipherKey)
+print(AesEncrypttedText)
 
-ptas= AESDecription(ctoaes,AESCipherKey)
-print(ptas)
+AesDecrypttedText = AESDEcryption(AesEncrypttedText[1],AESCipherKey,AesEncrypttedText[0])
+print(CeaserEncryptedText)
+
+CeaserDecryptedText = CeaserCipherDecrypt(AesDecrypttedText,CeaserCipherKey)
+print(CeaserDecryptedText)
