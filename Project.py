@@ -230,12 +230,25 @@ def openFile():
     newDAta=func(data[0],data[1],data[2],data[3])
     # newData1 = newDAta[0].split(",")
     things_To_add = newDAta[0]+newDAta[1]
+    
     stringing =""
     for i in range(len(things_To_add)):
         
         stringing=stringing+ str(things_To_add[i])
+    stringingEnc =""
+    for i in range(len(newDAta[0])):
+        
+        stringingEnc=stringingEnc+ str(newDAta[0][i])
+    stringingDec =""
+    for i in range(len(newDAta[1])):
+        
+        stringingDec=stringingDec+ str(newDAta[1][i])
     # print(stringing)
     # print(newDAta[0])
+    my_file = open("enc.txt","w+")
+    my_file.write(stringingEnc)
+    my_file = open("dec.txt","w+")
+    my_file.write(stringingDec)
     txtarea.insert(END, stringing)
     tf.close()
     return data
@@ -261,8 +274,8 @@ def saveFile():
 
 
 ws = Tk()
-ws.title("PythonGuides")
-ws.geometry("400x450")
+ws.title("Enigma")
+ws.geometry("1000x500")
 ws['bg']='#fb0'
 # adding frame
 frame = Frame(ws)
@@ -278,6 +291,10 @@ hor_sb.pack(side=BOTTOM, fill=BOTH)
 # adding writing space
 txtarea = Text(frame, width=40, height=20)
 txtarea.pack(side=LEFT)
+frame.pack(pady=20,padx=20)
+# adding writing space
+txtarea1 = Text(frame, width=40, height=20)
+txtarea1.pack(side=LEFT)
 
 # binding scrollbar with text area
 txtarea.config(yscrollcommand=ver_sb.set)
@@ -307,91 +324,91 @@ ws.mainloop()
 
 
 
-# Sample Inpute
+# # Sample Inpute
 
-PlainText = "I wandered lonely as a cloud That floats on."
+# PlainText = "I wandered lonely as a cloud That floats on."
 
-VignerCipherKey = "asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd"
+# VignerCipherKey = "asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd"
 
-DesCipherKey = b'hello123'
+# DesCipherKey = b'hello123'
 
-AESCipherKey = b'Sixteen byte key'
+# AESCipherKey = b'Sixteen byte key'
 
-CeaserCipherKey = len(VignerCipherKey)//3
+# CeaserCipherKey = len(VignerCipherKey)//3
 
-def enc(PlainText,CeaserCipherKey,AESCipherKey,VignerCipherKey,DesCipherKey):
-    # Step 1 Ceaser Cipher encryption
+# def enc(PlainText,CeaserCipherKey,AESCipherKey,VignerCipherKey,DesCipherKey):
+#     # Step 1 Ceaser Cipher encryption
 
-    CeaserEncryptedText =  CeaserEncrypt(PlainText,CeaserCipherKey)
-    print("\n")
-    print("---------------  ENCRYPTION  ---------------")
-    print("\n")
-    print("Plain Text after Ceaser Cipher Encryption : \n")
-    print(CeaserEncryptedText)
-    print("\n")
+#     CeaserEncryptedText =  CeaserEncrypt(PlainText,CeaserCipherKey)
+#     print("\n")
+#     print("---------------  ENCRYPTION  ---------------")
+#     print("\n")
+#     print("Plain Text after Ceaser Cipher Encryption : \n")
+#     print(CeaserEncryptedText)
+#     print("\n")
     
-    # Step 2 AES encryption
+#     # Step 2 AES encryption
 
-    AesEncrypttedText=AESEncryption(CeaserEncryptedText.encode(),AESCipherKey)
-    print("Encrypted Plain Text obatined after AES encryption : \n")
-    print(AesEncrypttedText[1])
-    print("\n")
+#     AesEncrypttedText=AESEncryption(CeaserEncryptedText.encode(),AESCipherKey)
+#     print("Encrypted Plain Text obatined after AES encryption : \n")
+#     print(AesEncrypttedText[1])
+#     print("\n")
     
-    # Step 3 for key Encryption using Vigenere
+#     # Step 3 for key Encryption using Vigenere
 
-    dec=vigenere_encrypt(AESCipherKey.decode(),VignerCipherKey)
-    print("Key after Vigenere Encryption: \n")
-    print(dec)
-    print("\n")
+#     dec=vigenere_encrypt(AESCipherKey.decode(),VignerCipherKey)
+#     print("Key after Vigenere Encryption: \n")
+#     print(dec)
+#     print("\n")
 
-    # Step 4 for key Encryption using DES
+#     # Step 4 for key Encryption using DES
 
-    dest =DesEncrryption(dec.encode(),DesCipherKey)
-    print("Key obtained from DES Encryption: \n")
-    print(dest)
-    print("\n")
+#     dest =DesEncrryption(dec.encode(),DesCipherKey)
+#     print("Key obtained from DES Encryption: \n")
+#     print(dest)
+#     print("\n")
 
-    return dest,AesEncrypttedText
-
-
-def dec(AesEncrypttedText,CeaserCipherKey,DesCipherKey,dest,VignerCipherKey):
-    print("---------------  DECRYPTION  ---------------")
-    print("\n")
-
-    # Step 1 Decrypting received Plain text using AES
-
-    AesDecrypttedText = AESDEcryption(AesEncrypttedText[1],AESCipherKey,AesEncrypttedText[0])
-
-    print("Decrypting received Plain text using AES: \n")
-    print(AesDecrypttedText)
-    print("\n")
-
-    # Step 2 Decrypting output of AES with ceaser
-
-    CeaserDecryptedText = CeaserCipherDecrypt(AesDecrypttedText,CeaserCipherKey)
-    print("Original Plain Text: \n")
-    print(CeaserDecryptedText)
-    print("\n")
-
-    # Step 3 for key Decrypt using DES
-
-    print("Decrypting Key using DES: \n")
-    dest1 =DesDecryption(dest,DesCipherKey)
-    print(dest1)
-    print("\n")
-
-    # Step 4 for key Decryption of output of DES with vigenere
-
-    print("Secret Key: \n")
-    dectxt=vigenere_decrypt(dest1.decode(),VignerCipherKey)
-    print(dectxt)
-
-    return dest1
+#     return dest,AesEncrypttedText
 
 
-dest=enc(PlainText,CeaserCipherKey,AESCipherKey,VignerCipherKey,DesCipherKey)
+# def dec(AesEncrypttedText,CeaserCipherKey,DesCipherKey,dest,VignerCipherKey):
+#     print("---------------  DECRYPTION  ---------------")
+#     print("\n")
+
+#     # Step 1 Decrypting received Plain text using AES
+
+#     AesDecrypttedText = AESDEcryption(AesEncrypttedText[1],AESCipherKey,AesEncrypttedText[0])
+
+#     print("Decrypting received Plain text using AES: \n")
+#     print(AesDecrypttedText)
+#     print("\n")
+
+#     # Step 2 Decrypting output of AES with ceaser
+
+#     CeaserDecryptedText = CeaserCipherDecrypt(AesDecrypttedText,CeaserCipherKey)
+#     print("Original Plain Text: \n")
+#     print(CeaserDecryptedText)
+#     print("\n")
+
+#     # Step 3 for key Decrypt using DES
+
+#     print("Decrypting Key using DES: \n")
+#     dest1 =DesDecryption(dest,DesCipherKey)
+#     print(dest1)
+#     print("\n")
+
+#     # Step 4 for key Decryption of output of DES with vigenere
+
+#     print("Secret Key: \n")
+#     dectxt=vigenere_decrypt(dest1.decode(),VignerCipherKey)
+#     print(dectxt)
+
+#     return dest1
 
 
-dec(dest[1],CeaserCipherKey,DesCipherKey,dest[0],VignerCipherKey)
+# dest=enc(PlainText,CeaserCipherKey,AESCipherKey,VignerCipherKey,DesCipherKey)
+
+
+# dec(dest[1],CeaserCipherKey,DesCipherKey,dest[0],VignerCipherKey)
 
 
