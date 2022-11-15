@@ -249,7 +249,8 @@ def openFile():
     my_file.write(stringingEnc)
     my_file = open("dec.txt","w+")
     my_file.write(stringingDec)
-    txtarea.insert(END, stringing)
+    txtarea.insert(END, stringingEnc)
+    txtarea1.insert(END, stringingDec)
     tf.close()
     return data
 
