@@ -110,6 +110,7 @@ def func(PlainText,VignerCipherKey,c,d):
         print("\n")
         arrD.append("Decrypting received Plain text using AES: \n")
         arrD.append(timestamp)
+        arrD.append("\n")
         arrD.append(AesDecrypttedText)
 
         # Step 2 Decrypting output of AES with ceaser
@@ -120,6 +121,7 @@ def func(PlainText,VignerCipherKey,c,d):
         print("\n")
         arrD.append("Original Plain Text: \n")
         arrD.append(timestamp)
+        arrD.append("\n")
         arrD.append(CeaserDecryptedText)
 
         # Step 3 for key Decrypt using DES
@@ -130,7 +132,9 @@ def func(PlainText,VignerCipherKey,c,d):
         print("\n")
         arrD.append("Decrypting Key using DES: \n")
         arrD.append(timestamp)
-        arrD.append(dest1)
+        arrD.append("\n")
+        strG =str(dest1)
+        arrD.append(strG)
 
         # Step 4 for key Decryption of output of DES with vigenere
 
@@ -140,6 +144,7 @@ def func(PlainText,VignerCipherKey,c,d):
 
         arrD.append("Secret Key: \n")
         arrD.append(timestamp)
+        arrD.append("\n")
         arrD.append(dectxt)
 
         return dest1,arrD
@@ -166,8 +171,10 @@ def openFile():
     print(data)
     newDAta=func(data[0],data[1],data[2],data[3])
     # newData1 = newDAta[0].split(",")
+    things_To_add = newDAta[0]+newDAta[1]
+    print(things_To_add)
     print(newDAta[0])
-    txtarea.insert(END, newDAta[0])
+    txtarea.insert(END, things_To_add)
     tf.close()
     return data
 
