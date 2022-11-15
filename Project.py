@@ -18,6 +18,7 @@ from Vigenère import *
 from AES import *
 from DES import *
 from sha import *
+from Trippledes import *
 
 from tkinter import *
 from tkinter import filedialog
@@ -92,7 +93,6 @@ def func(PlainText,VignerCipherKey,c,d):
         
         
         # Step 3 for key Encryption using Vigenere
-        timeStampDesBegning =int(time() * 1000)
 
         dec=vigenere_encrypt(AESCipherKey.decode(),VignerCipherKey)
         print("Key after Vigenere Encryption: \n")
@@ -107,6 +107,7 @@ def func(PlainText,VignerCipherKey,c,d):
         arr.append(dec)
 
         # Step 4 for key Encryption using DES
+        timeStampDesBegning =int(time() * 1000)
 
         dest =DesEncrryption(dec.encode(),DesCipherKey)
         print("Key obtained from DES Encryption: \n")
@@ -123,12 +124,22 @@ def func(PlainText,VignerCipherKey,c,d):
         arr.append(strg1)
 
         timeStampDesEnd =int(time() * 1000)
-        print("time for des algo is ",timeStampDesBegning-timeStampDesEnd)
+        timestampOfDes = timeStampDesEnd-timeStampDesBegning
+        print("time for des algo in millisecond ",timestampOfDes)
+        arr.append("\n\n")
+        arr.append("Time taken in millisecond is ")
+        arr.append(timestampOfDes)
+        arr.append("\n\n")
         # print(arr)
-        return dest,AesEncrypttedText,arr
+
+        Tripdest = triipleDesEncode(dec)
+        print("\n\n\nTripple Des ",Tripdest)
+
+        
+        return dest,AesEncrypttedText,arr,Tripdest
 
 
-    def dec(AesEncrypttedText,CeaserCipherKey,DesCipherKey,dest,VignerCipherKey):
+    def dec(AesEncrypttedText,CeaserCipherKey,DesCipherKey,dest,VignerCipherKey,Tripdest):
         arrD = []
         print("---------------  DECRYPTION  ---------------")
         print("\n")
@@ -179,6 +190,9 @@ def func(PlainText,VignerCipherKey,c,d):
         strG =str(dest1)
         arrD.append(strG)
 
+        DeTripDes =triipleDesDecode(Tripdest)
+        print("\n\n\nTripple Des decription ",DeTripDes)
+
         # Step 4 for key Decryption of output of DES with vigenere
 
         print("Secret Key: \n")
@@ -198,7 +212,7 @@ def func(PlainText,VignerCipherKey,c,d):
     dest=enc(PlainText,CeaserCipherKey,AESCipherKey,VignerCipherKey,DesCipherKey)
 
 
-    deDest=dec(dest[1],CeaserCipherKey,DesCipherKey,dest[0],VignerCipherKey)
+    deDest=dec(dest[1],CeaserCipherKey,DesCipherKey,dest[0],VignerCipherKey,dest[3])
 
     return dest[2],deDest[1]
 
