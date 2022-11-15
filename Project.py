@@ -4,10 +4,14 @@
 # from pydoc import plain
 # from getpass import getpass
 
-import time
+from time import time
+ 
+timestamp = int(time() * 1000)
+ 
+print("Time in milliseconds since epoch", timestamp)
 
-timestamp1 = time.time()
-timestamp = int(timestamp1)
+# timestamp1 = time.time()
+# timestamp = int(time.time())
 
 from Ceaser import *
 from Vigenère import *
@@ -27,7 +31,7 @@ def func(PlainText,VignerCipherKey,c,d):
     # DesCipherKey = b'hello123'
 
     # AESCipherKey = b'Sixteen byte key'
-    PlainText = "I wandered lonely as a cloud That floats on."
+    PlainText = PlainText
 
     VignerCipherKey = "asdasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd"
 
@@ -74,11 +78,13 @@ def func(PlainText,VignerCipherKey,c,d):
         strg=str(AesEncrypttedText[1])
         arr.append(strg)
         arr.append("\n\n")
+        arr.append("\n\n")
         arr.append("The sha for the aes encrypted text is")
         shaValue = sha(AesEncrypttedText[1])
         arr.append("\n")
         arr.append("Time Stamp is :- ")
         arr.append(timestamp)
+        arr.append("\n")
         strSha = str(shaValue)
         arr.append(strSha)
         arr.append("\n\n")
@@ -86,6 +92,7 @@ def func(PlainText,VignerCipherKey,c,d):
         
         
         # Step 3 for key Encryption using Vigenere
+        timeStampDesBegning =int(time() * 1000)
 
         dec=vigenere_encrypt(AESCipherKey.decode(),VignerCipherKey)
         print("Key after Vigenere Encryption: \n")
@@ -115,6 +122,8 @@ def func(PlainText,VignerCipherKey,c,d):
         arr.append("\n")
         arr.append(strg1)
 
+        timeStampDesEnd =int(time() * 1000)
+        print("time for des algo is ",timeStampDesBegning-timeStampDesEnd)
         # print(arr)
         return dest,AesEncrypttedText,arr
 
@@ -203,14 +212,17 @@ def openFile():
     pathh.insert(END, tf)
     tf = open(tf)  # or tf = open(tf, 'r')
     data = tf.read().splitlines()
-    data1 = tf.read()
     print(data)
     newDAta=func(data[0],data[1],data[2],data[3])
     # newData1 = newDAta[0].split(",")
     things_To_add = newDAta[0]+newDAta[1]
-    print(things_To_add)
-    print(newDAta[0])
-    txtarea.insert(END, things_To_add)
+    stringing =""
+    for i in range(len(things_To_add)):
+        
+        stringing=stringing+ str(things_To_add[i])
+    # print(stringing)
+    # print(newDAta[0])
+    txtarea.insert(END, stringing)
     tf.close()
     return data
 

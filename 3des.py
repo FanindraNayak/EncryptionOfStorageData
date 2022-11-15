@@ -18,4 +18,5 @@ def triipleDesDecode(msg):
     print(decryptmsg[16:])
     return decryptmsg[16:]
 
-# triipleDesEncode('We are no longer the knights who say ni!')
+msg = triipleDesEncode('We are no longer the knights who say ni!')
+triipleDesDecode(msg)
