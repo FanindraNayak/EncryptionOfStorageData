@@ -8,10 +8,12 @@ import time
 
 timestamp1 = time.time()
 timestamp = int(timestamp1)
+
 from Ceaser import *
 from Vigenère import *
 from AES import *
 from DES import *
+from sha import *
 
 from tkinter import *
 from tkinter import filedialog
@@ -47,8 +49,12 @@ def func(PlainText,VignerCipherKey,c,d):
         print(CeaserEncryptedText)
         print("\n")
         arr.append("---------------  ENCRYPTION  ---------------")
+        arr.append("\n")
+        arr.append("Time Stamp is :- ")
         arr.append(timestamp)
         arr.append("Plain Text after Ceaser Cipher Encryption : \n")
+        arr.append("\n")
+        arr.append("Time Stamp is :- ")
         arr.append(timestamp)
         arr.append("\n")
         arr.append(CeaserEncryptedText)
@@ -61,10 +67,22 @@ def func(PlainText,VignerCipherKey,c,d):
         print("\n")
         arr.append("\n\n")
         arr.append("Encrypted Plain Text obatined after AES encryption : \n")
+        arr.append("\n")
+        arr.append("Time Stamp is :- ")
         arr.append(timestamp)
         arr.append("\n")
         strg=str(AesEncrypttedText[1])
         arr.append(strg)
+        arr.append("\n\n")
+        arr.append("The sha for the aes encrypted text is")
+        shaValue = sha(AesEncrypttedText[1])
+        arr.append("\n")
+        arr.append("Time Stamp is :- ")
+        arr.append(timestamp)
+        strSha = str(shaValue)
+        arr.append(strSha)
+        arr.append("\n\n")
+        arr.append("\n\n")
         
         
         # Step 3 for key Encryption using Vigenere
@@ -75,6 +93,8 @@ def func(PlainText,VignerCipherKey,c,d):
         print("\n")
         arr.append("\n\n")
         arr.append("Key after Vigenere Encryption: \n")
+        arr.append("\n")
+        arr.append("Time Stamp is :- ")
         arr.append(timestamp)
         arr.append("\n")
         arr.append(dec)
@@ -88,10 +108,13 @@ def func(PlainText,VignerCipherKey,c,d):
         arr.append("\n\n")
         arr.append("Key obtained from DES Encryption: \n")
         arr.append("\n")
+        arr.append("\n")
+        arr.append("Time Stamp is :- ")
         arr.append(timestamp)
         strg1=str(dest)
         arr.append("\n")
         arr.append(strg1)
+
         # print(arr)
         return dest,AesEncrypttedText,arr
 
@@ -100,6 +123,8 @@ def func(PlainText,VignerCipherKey,c,d):
         arrD = []
         print("---------------  DECRYPTION  ---------------")
         print("\n")
+        arrD.append("\n\n")
+        arrD.append("\n\n")
         arrD.append("---------------  DECRYPTION  ---------------\n")
         # Step 1 Decrypting received Plain text using AES
 
@@ -108,7 +133,10 @@ def func(PlainText,VignerCipherKey,c,d):
         print("Decrypting received Plain text using AES: \n")
         print(AesDecrypttedText)
         print("\n")
+        arrD.append("\n\n")
         arrD.append("Decrypting received Plain text using AES: \n")
+        arrD.append("\n")
+        arrD.append("Time Stamp is :- ")
         arrD.append(timestamp)
         arrD.append("\n")
         arrD.append(AesDecrypttedText)
@@ -119,7 +147,10 @@ def func(PlainText,VignerCipherKey,c,d):
         print("Original Plain Text: \n")
         print(CeaserDecryptedText)
         print("\n")
+        arrD.append("\n\n")
         arrD.append("Original Plain Text: \n")
+        arrD.append("\n")
+        arrD.append("Time Stamp is :- ")
         arrD.append(timestamp)
         arrD.append("\n")
         arrD.append(CeaserDecryptedText)
@@ -130,7 +161,10 @@ def func(PlainText,VignerCipherKey,c,d):
         dest1 =DesDecryption(dest,DesCipherKey)
         print(dest1)
         print("\n")
+        arrD.append("\n\n")
         arrD.append("Decrypting Key using DES: \n")
+        arrD.append("\n")
+        arrD.append("Time Stamp is :- ")
         arrD.append(timestamp)
         arrD.append("\n")
         strG =str(dest1)
@@ -141,8 +175,10 @@ def func(PlainText,VignerCipherKey,c,d):
         print("Secret Key: \n")
         dectxt=vigenere_decrypt(dest1.decode(),VignerCipherKey)
         print(dectxt)
-
+        arrD.append("\n\n")
         arrD.append("Secret Key: \n")
+        arrD.append("\n")
+        arrD.append("Time Stamp is :- ")
         arrD.append(timestamp)
         arrD.append("\n")
         arrD.append(dectxt)
@@ -244,12 +280,6 @@ Button(
 ws.mainloop()
 
 
-# PlainText = input("Enter the plain Text: ")
-# VignerCipherKey = input("Enter the VignerCipherKey: ")
-# DesCipherKey1 = input("Enter the DesCipherKey: ")
-# AESCipherKey2 = input("Enter the AESCipherKey: ")
-# DesCipherKey=DesCipherKey1.encode()
-# AESCipherKey=AESCipherKey2.encode()
 
 # Sample Inpute
 
